@@ -18,3 +18,4 @@ jobs:
         id: fetch
         run: |
           curl -s https://raw.githubusercontent.com/async-aws/aws/master/README.md | grep -oEP '\| \[[^\]]+\]\(https://github.com/(async-aws/[^)]+)\)'
+          curl -s https://raw.githubusercontent.com/async-aws/aws/master/README.md | grep -oE '\| \[[^\]]+\]\(https://github.com/(async-aws/[^)]+)\)'
