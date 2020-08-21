@@ -9,7 +9,8 @@ $filename = $argv[1];
 $count = $argv[2];
 
 $image = new SVG(90, 20);
-$svgText = new SVGText($count. ' commits', 4, 15);
+$suffix = $count === 1 ? 'commit' : 'commits';
+$svgText = new SVGText($count. ' '.$suffix, 4, 15);
 
 $image->getDocument()->addChild($svgText);
 file_put_contents(dirname(__DIR__).'/docs/'.$filename.'.svg', $image->toXMLString());
