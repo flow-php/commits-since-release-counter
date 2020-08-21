@@ -39,6 +39,11 @@ jobs:
             count=$(git rev-list --count $(git describe --abbrev=0 --tags)..HEAD)
             cd ..
             rm -rf output
-            echo "TODO, generate an SVG with '$count' and write it to $REPOSITORY.svg."
+
+            php src/image.php $REPOSITORY $count
             echo ::endgroup::
           done
+
+      - name: View output
+        run: |
+          ls -l public
