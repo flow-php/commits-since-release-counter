@@ -28,6 +28,9 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
 
       - name: Compare & Print
         run: |
@@ -48,7 +51,7 @@ jobs:
         run: |
           ls -l public
 
-      - name: Commit & push the new files
+      - name: Commit changes
         run: |
           echo "::group::git status"
           git status
@@ -68,3 +71,9 @@ jobs:
           git commit -m "Update images with new data" public/*
           git push
           echo "::endgroup::"
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.BOT_GITHUB_TOKEN }}
+
