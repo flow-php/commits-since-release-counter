@@ -1,4 +1,4 @@
-name: Watch for changes
+name: Update source images
 
 on:
   schedule:
@@ -17,5 +17,28 @@ jobs:
       - name: Fetch data
         id: fetch
         run: |
-          curl -s https://raw.githubusercontent.com/async-aws/aws/master/README.md | grep -oEP '\| \[[^\]]+\]\(https://github.com/(async-aws/[^)]+)\)'
-          curl -s https://raw.githubusercontent.com/async-aws/aws/master/README.md | grep -oE '\| \[[^\]]+\]\(https://github.com/(async-aws/[^)]+)\)'
+          repos=$(curl -s https://raw.githubusercontent.com/async-aws/aws/master/README.md | grep -oP '^\| \[[^!\]]+\]\(https://github\.com/async-aws/\K[^)]+')
+          echo "Here are the listed repos: $repos"
+          echo ::set-output name=repos::$repos
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@2.1.2
+        with:
+          php-version: 7.4
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Compare & Print
+        run: |
+          for REPOSITORY in ${{ steps.fetch.outputs.repos }}
+          do
+            echo ::group::async-aws/$REPOSITORY
+            git clone --branch master https://${{ secrets.BOT_GITHUB_TOKEN }}:x-oauth-basic@github.com/async-aws/$REPOSITORY/ output
+            cd output
+            count=$(git rev-list --count $(git describe --abbrev=0 --tags)..HEAD)
+            cd ..
+            rm -rf output
+            echo "TODO, generate an SVG with '$count' and write it to $REPOSITORY.svg."
+            echo ::endgroup::
+          done
