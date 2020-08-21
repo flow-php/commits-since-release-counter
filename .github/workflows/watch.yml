@@ -47,3 +47,24 @@ jobs:
       - name: View output
         run: |
           ls -l public
+
+      - name: Commit & push the new files
+        run: |
+          echo "::group::git status"
+          git status
+          echo "::endgroup::"
+
+          git add -N public
+          if [[ $(git diff --numstat | wc -l) -eq 0 ]]; then
+            echo "No changes found. Exiting."
+            exit 0;
+          fi
+
+          git config --local user.email "github@async-aws.com"
+          git config --local user.name "AsyncAWS Bot"
+
+          echo "::group::git push"
+          git add .
+          git commit -m "Update images with new data" -a public
+          git push
+          echo "::endgroup::"
