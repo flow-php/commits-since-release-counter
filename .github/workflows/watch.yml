@@ -1,0 +1,20 @@
+name: Watch for changes
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  pull_request: ~
+  push:
+    branches:
+      - master
+
+jobs:
+  update:
+    name: Update source code
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Fetch data
+        id: fetch
+        run: |
+          curl -s https://raw.githubusercontent.com/async-aws/aws/master/README.md | grep -oEP '\| \[[^\]]+\]\(https://github.com/(async-aws/[^)]+)\)'
