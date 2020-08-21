@@ -6,7 +6,7 @@ use SVG\SVG;
 use SVG\Nodes\Texts\SVGText;
 
 $filename = $argv[1];
-$count = $argv[2];
+$count = (int) $argv[2];
 
 $image = new SVG(90, 20);
 $suffix = $count === 1 ? 'commit' : 'commits';
