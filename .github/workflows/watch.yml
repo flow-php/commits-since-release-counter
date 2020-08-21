@@ -47,17 +47,13 @@ jobs:
             echo ::endgroup::
           done
 
-      - name: View output
-        run: |
-          ls -l public
-
       - name: Commit changes
         run: |
           echo "::group::git status"
           git status
           echo "::endgroup::"
 
-          git add -N public
+          git add -N docs
           if [[ $(git diff --numstat | wc -l) -eq 0 ]]; then
             echo "No changes found. Exiting."
             exit 0;
@@ -67,7 +63,7 @@ jobs:
           git config --local user.name "AsyncAWS Bot"
 
           echo "::group::git push"
-          git add public/*
+          git add docs/*
           git commit -m "Update images with new data"
           echo "::endgroup::"
 

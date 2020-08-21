@@ -5,4 +5,4 @@ $count = $argv[2];
 
 // TODO create a proper SVG
 
-file_put_contents(dirname(__DIR__).'/public/'.$filename.'.svg', $count);
+file_put_contents(dirname(__DIR__).'/docs/'.$filename.'.svg', $count);
