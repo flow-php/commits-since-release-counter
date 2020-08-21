@@ -28,6 +28,9 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
 
       - name: Compare & Print
         run: |
@@ -39,6 +42,37 @@ jobs:
             count=$(git rev-list --count $(git describe --abbrev=0 --tags)..HEAD)
             cd ..
             rm -rf output
-            echo "TODO, generate an SVG with '$count' and write it to $REPOSITORY.svg."
+
+            php src/image.php $REPOSITORY $count
             echo ::endgroup::
           done
+
+      - name: View output
+        run: |
+          ls -l public
+
+      - name: Commit changes
+        run: |
+          echo "::group::git status"
+          git status
+          echo "::endgroup::"
+
+          git add -N public
+          if [[ $(git diff --numstat | wc -l) -eq 0 ]]; then
+            echo "No changes found. Exiting."
+            exit 0;
+          fi
+
+          git config --local user.email "github@async-aws.com"
+          git config --local user.name "AsyncAWS Bot"
+
+          echo "::group::git push"
+          git add public/*
+          git commit -m "Update images with new data"
+          echo "::endgroup::"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.BOT_GITHUB_TOKEN }}
+
