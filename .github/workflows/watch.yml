@@ -32,6 +32,10 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
+      - name: Download dependencies
+        run: |
+          composer update --no-interaction --prefer-dist --optimize-autoloader
+
       - name: Compare & Print
         run: |
           for REPOSITORY in ${{ steps.fetch.outputs.repos }}
