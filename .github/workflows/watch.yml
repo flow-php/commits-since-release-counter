@@ -2,8 +2,7 @@ name: Update source images
 
 on:
   schedule:
-    - cron: '0 6 * * *'
-  pull_request: ~
+    - cron: '0 */1 * * *'
   push:
     branches:
       - master
