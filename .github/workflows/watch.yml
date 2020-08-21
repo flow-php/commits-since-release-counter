@@ -67,13 +67,12 @@ jobs:
           git config --local user.name "AsyncAWS Bot"
 
           echo "::group::git push"
-          git add .
-          git commit -m "Update images with new data" public/*
-          git push
+          git add public/*
+          git commit -m "Update images with new data"
           echo "::endgroup::"
 
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.BOT_GITHUB_TOKEN }}
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.BOT_GITHUB_TOKEN }}
 
