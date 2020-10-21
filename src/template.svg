@@ -10,7 +10,7 @@
     </linearGradient>
   </defs>
   <g fill="none" fill-rule="evenodd">
-    <g font-family="&#39;DejaVu Sans&#39;,Verdana,Geneva,sans-serif" font-size="11">
+    <g font-family="&#39;DejaVu Sans&#39;,Verdana,Geneva,sans-serif" font-size="11px">
       <path id="workflow-bg" d="M0,3 C0,1.3431 1.3552,0 3.02702703,0 L74,0 L74,20 L3.02702703,20 C1.3552,20 0,18.6569 0,17 L0,3 Z" fill="url(#workflow-fill)" fill-rule="nonzero"></path>
       <text fill="#010101" fill-opacity=".3">
         <tspan x="21" y="15">Commits</tspan>
@@ -19,7 +19,7 @@
         <tspan x="21" y="14">Commits</tspan>
       </text>
     </g>
-    <g transform="translate(74)" font-family="&#39;DejaVu Sans&#39;,Verdana,Geneva,sans-serif" font-size="11">
+    <g transform="translate(74)" font-family="&#39;DejaVu Sans&#39;,Verdana,Geneva,sans-serif" font-size="11px">
       <path d="M0,0 L25.34706,0 C26.25966,0 27,1.343 27,3 L27,17 C27,18.657 26.2602,20 25.34706,20 L0,20 L0,0 Z" id="state-bg" fill="url(#state-fill)" fill-rule="nonzero"></path>
       <text fill="#010101" fill-opacity=".3">
         <tspan x="3" y="15" id="commit-shadow">COMMIT_NUMBER</tspan>
