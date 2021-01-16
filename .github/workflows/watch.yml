@@ -7,7 +7,7 @@ on:
 jobs:
   update:
     name: Update source code
-    runs-on: ubuntu-latest
+    runs-on: Ubuntu-20.04
 
     steps:
       - name: Fetch data
@@ -18,7 +18,7 @@ jobs:
           echo ::set-output name=repos::$repos
 
       - name: Set up PHP
-        uses: shivammathur/setup-php@2.1.2
+        uses: shivammathur/setup-php@2.9.0
         with:
           php-version: 7.4
 
@@ -30,7 +30,7 @@ jobs:
 
       - name: Download dependencies
         run: |
-          composer update --no-interaction --prefer-dist --optimize-autoloader
+          composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: Compare & Print
         run: |
