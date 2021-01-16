@@ -1,7 +1,6 @@
 name: Update source images
 
 on:
-  push: ~
   schedule:
     - cron: '45 * * * *'
 
