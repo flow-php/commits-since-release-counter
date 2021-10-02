@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><svg width="101" height="20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><linearGradient id="workflow-fill" x1="50%" y1="0%" x2="50%" y2="100%"><stop offset="0%" style="stop-color: #444D56" /><stop offset="100%" style="stop-color: #24292E" />
       
       
-    </linearGradient><linearGradient id="state-fill" x1="50%" y1="0%" x2="50%" y2="100%"><stop offset="0%" style="stop-color: #C5D034" /><stop offset="100%" style="stop-color: #A8B12F" />
+    </linearGradient><linearGradient id="state-fill" x1="50%" y1="0%" x2="50%" y2="100%"><stop offset="0%" style="stop-color: #34D058" /><stop offset="100%" style="stop-color: #28A745" />
       
       
     </linearGradient>
@@ -15,9 +15,9 @@
       
       
       
-    </g><g transform="translate(74)" style="font-family: 'DejaVu Sans',Verdana,Geneva,sans-serif; font-size: 11px"><path d="M0,0 L25.34706,0 C26.25966,0 27,1.343 27,3 L27,17 C27,18.657 26.2602,20 25.34706,20 L0,20 L0,0 Z" id="state-bg" style="fill: url(#state-fill); fill-rule: nonzero" /><text x="0" y="0" style="fill: #010101; fill-opacity: .3"><tspan x="7" y="15" id="commit-shadow"> 14</tspan>
+    </g><g transform="translate(74)" style="font-family: 'DejaVu Sans',Verdana,Geneva,sans-serif; font-size: 11px"><path d="M0,0 L25.34706,0 C26.25966,0 27,1.343 27,3 L27,17 C27,18.657 26.2602,20 25.34706,20 L0,20 L0,0 Z" id="state-bg" style="fill: url(#state-fill); fill-rule: nonzero" /><text x="0" y="0" style="fill: #010101; fill-opacity: .3"><tspan x="10" y="15" id="commit-shadow"> 1</tspan>
         
-      </text><text x="0" y="0" style="fill: #FFFFFF"><tspan x="7" y="14" id="commit-number"> 14</tspan>
+      </text><text x="0" y="0" style="fill: #FFFFFF"><tspan x="10" y="14" id="commit-number"> 1</tspan>
         
       </text>
       
