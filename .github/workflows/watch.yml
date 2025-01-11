@@ -7,23 +7,28 @@ on:
 jobs:
   update:
     name: Update source code
-    runs-on: Ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Fetch data
         id: fetch
         run: |
-          repos=$(curl -s https://raw.githubusercontent.com/async-aws/aws/master/README.md | grep -oP '^\| \[[^!\]]+\]\(https://github\.com/async-aws/\K[^)]+')
+          # Fetch your JSON manifest from GitHub (or wherever it’s hosted)
+          data=$(curl -s https://raw.githubusercontent.com/flow-php/flow/refs/heads/1.x/manifest.json)
+
+          # Use 'jq' to extract the `.packages[].name` fields as a space-separated list
+          repos=$(echo "$data" | jq -r '.packages[].name')
+
           echo "Here are the listed repos: $repos"
-          echo ::set-output name=repos::$repos
+          echo "::set-output name=repos::$repos"
 
       - name: Set up PHP
         uses: shivammathur/setup-php@2.9.0
         with:
-          php-version: 7.4
+          php-version: 8.2
 
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -34,17 +39,25 @@ jobs:
 
       - name: Compare & Print
         run: |
+          # Loop over each repository name we got from the 'Fetch data' step
           for REPOSITORY in ${{ steps.fetch.outputs.repos }}
           do
-            echo ::group::async-aws/$REPOSITORY
-            git clone --branch master https://${{ secrets.BOT_GITHUB_TOKEN }}:x-oauth-basic@github.com/async-aws/$REPOSITORY/ output
+            echo "::group::$REPOSITORY"
+
+            # Clone the repository (1.x branch as in the original example)
+            git clone --branch 1.x https://${{ secrets.GH_TOKEN }}:x-oauth-basic@github.com/$REPOSITORY output
+
             cd output
+            # Count how many commits happened since the last tag
             count=$(git rev-list --count $(git describe --abbrev=0 --tags)..HEAD)
+
             cd ..
             rm -rf output
 
-            php src/image.php $REPOSITORY $count
-            echo ::endgroup::
+            # Example call to your PHP script
+            php ./src/image.php $REPOSITORY $count
+
+            echo "::endgroup::"
           done
 
       - name: Commit changes
