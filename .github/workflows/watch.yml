@@ -73,8 +73,8 @@ jobs:
             exit 0;
           fi
 
-          git config --local user.email "github@async-aws.com"
-          git config --local user.name "AsyncAWS Bot"
+          git config --local user.email "github@flow-php.com"
+          git config --local user.name "Flow PHP Bot"
 
           echo "::group::git push"
           git add docs/*
@@ -84,5 +84,5 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.BOT_GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
 
