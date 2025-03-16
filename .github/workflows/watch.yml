@@ -14,14 +14,13 @@ jobs:
       - name: Fetch data
         id: fetch
         run: |
-          # Fetch your JSON manifest from GitHub (or wherever it’s hosted)
           data=$(curl -s https://raw.githubusercontent.com/flow-php/flow/refs/heads/1.x/manifest.json)
 
-          # Use 'jq' to extract the `.packages[].name` fields as a space-separated list
-          repos=$(echo "$data" | jq -r '.packages[].name')
+          # Use 'jq' to extract as a space-separated list on a single line
+          repos=$(echo "$data" | jq -r '.packages[].name' | tr '\n' ' ')
 
-          echo "Here are the listed repos: $repos"
-          echo "::set-output name=repos::$repos"
+          # Set the output using the new syntax
+          echo "repos=$repos" >> $GITHUB_OUTPUT
 
       - name: Set up PHP
         uses: shivammathur/setup-php@2.9.0
