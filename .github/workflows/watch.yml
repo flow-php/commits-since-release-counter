@@ -40,6 +40,10 @@ jobs:
 
       - name: Compare & Print
         run: |
+          echo "Here are the listed repos:\n"
+          echo "${{ steps.fetch.outputs.repos }}"
+          echo "-------\n\n"
+
           # Loop over each repository name we got from the 'Fetch data' step
           for REPOSITORY in ${{ steps.fetch.outputs.repos }}
           do
